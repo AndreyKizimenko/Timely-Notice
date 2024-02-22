@@ -2,6 +2,8 @@
 
 import React from "react";
 import { Button, TextArea, TextField } from "@radix-ui/themes";
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 
 const NewIssuePage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,7 +25,7 @@ const NewIssuePage = () => {
           <TextField.Root>
             <TextField.Input placeholder="Issue title" />
           </TextField.Root>
-          <TextArea placeholder="Issue description" size="3" />
+          <SimpleMDE placeholder="Issue description" />
           <Button type="submit">Add new issue</Button>
         </form>
       </div>
