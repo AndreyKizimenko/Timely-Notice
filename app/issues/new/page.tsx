@@ -1,35 +1,66 @@
 "use client";
-
-import React from "react";
-import { Button, TextArea, TextField } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
+import React, { useState } from "react";
+import { Button, Callout, Link, TextArea, TextField } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
+import { z } from "zod";
+import { FieldValues, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import FormError from "@/app/components/FormError";
+import { newIssueSchema } from "@/app/validationSchemas";
+
+type FormData = z.infer<typeof newIssueSchema>;
 
 const NewIssuePage = () => {
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const response = await fetch("/api/issues", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: "Issue title",
-        description: "Issue description which is a very long string, test description long string",
-      }),
-    });
-  };
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isLoading },
+  } = useForm<FormData>({ resolver: zodResolver(newIssueSchema) });
 
   return (
-    <>
-      <div className="flex justify-center ">
-        <form className="w-2/5 space-y-3" onSubmit={handleSubmit}>
-          <TextField.Root>
-            <TextField.Input placeholder="Issue title" />
-          </TextField.Root>
-          <SimpleMDE placeholder="Issue description" />
-          <Button type="submit">Add new issue</Button>
-        </form>
-      </div>
-    </>
+    <div className="flex flex-col items-center">
+      {error && (
+        <Callout.Root size="1" className="w-2/5 mb-4" color="red">
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
+
+      <form
+        className="w-2/5"
+        onSubmit={handleSubmit(async (data: FieldValues) => {
+          try {
+            await axios.post("/api/issues", data);
+            router.push("/issues");
+          } catch (error) {
+            setError("An unexpected error has occured");
+          }
+        })}
+      >
+        <TextField.Root>
+          <TextField.Input
+            placeholder="Issue title"
+            {...register("title", { required: true })}
+            aria-invalid={errors.title ? "true" : "false"}
+          />
+        </TextField.Root>
+        {errors.title && <FormError>{errors.title.message}</FormError>}
+        <TextArea
+          className="my-4"
+          size="3"
+          placeholder="Issue description"
+          {...register("description", { required: true })}
+          aria-invalid={errors.description ? "true" : "false"}
+        />
+        {errors.description && <FormError>{errors.description.message}</FormError>}
+
+        <Button type="submit">Add new issue</Button>
+      </form>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ const NavBar = () => {
   return (
     <nav className="flex space-x-10 border-b items-center h-14 py-8 px-4">
       <Link href="/">
-        <Image src="/favicon.ico" alt="logo" width={50} height={50} className="object-contain" />
+        <Image src="/favicon.ico" alt="logo" width={50} height={50} className="object-contain" priority={true} />
       </Link>
 
       <ul className="flex space-x-6 text-lg">

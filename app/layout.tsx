@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Theme appearance="light" accentColor="green" panelBackground="solid" radius="large">
+        <Theme accentColor="green" panelBackground="solid" radius="large">
           <NavBar />
           <main className="mx-4 mt-10">{children}</main>
         </Theme>
