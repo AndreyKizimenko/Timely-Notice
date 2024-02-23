@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 
-const FormError = ({ children }: { children: ReactNode }) => {
+const FormError = ({ children }: PropsWithChildren) => {
   return <p className="mt-1 text-xs text-right text-red-400" role="alert">{children}</p>;
 };
 

@@ -9,6 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
 import { newIssueSchema } from "@/app/validationSchemas";
+import Spinner from "@/app/components/Spinner";
 
 type FormData = z.infer<typeof newIssueSchema>;
 
@@ -19,7 +20,7 @@ const NewIssuePage = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors, isLoading },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(newIssueSchema) });
 
   return (
@@ -58,7 +59,14 @@ const NewIssuePage = () => {
         />
         {errors.description && <FormError>{errors.description.message}</FormError>}
 
-        <Button type="submit">Add new issue</Button>
+        {isSubmitting ? (
+          <Button disabled type="submit">
+            <Spinner />
+            Adding...
+          </Button>
+        ) : (
+          <Button type="submit">Add new issue</Button>
+        )}
       </form>
     </div>
   );
