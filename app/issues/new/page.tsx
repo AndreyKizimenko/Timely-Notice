@@ -22,6 +22,14 @@ const NewIssuePage = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(newIssueSchema) });
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      await axios.post("/api/issues", data);
+      router.push("/issues");
+    } catch (error) {
+      setError("An unexpected error has occured");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -31,17 +39,7 @@ const NewIssuePage = () => {
         </Callout.Root>
       )}
 
-      <form
-        className="w-2/5"
-        onSubmit={handleSubmit(async (data: FieldValues) => {
-          try {
-            await axios.post("/api/issues", data);
-            router.push("/issues");
-          } catch (error) {
-            setError("An unexpected error has occured");
-          }
-        })}
-      >
+      <form className="w-2/5" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
           <TextField.Input
             placeholder="Issue title"
