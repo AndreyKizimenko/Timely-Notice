@@ -1,16 +1,15 @@
-import { Table } from "@radix-ui/themes";
+import { Button, Table } from "@radix-ui/themes";
 import React from "react";
-import StatusBadge from "./StatusBadge";
-import delay from "delay";
+import StatusBadge from "../components/StatusBadge";
 import prisma from "@/prisma/client";
+import Link from "next/link";
 
 const DataTable = async () => {
   const issueList = await prisma?.issue.findMany({ orderBy: [{ status: "asc" }] });
 
   if (!issueList) return <h1>No issues available</h1>;
-  await delay(2000);
+
   return (
-    
     <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
@@ -27,7 +26,11 @@ const DataTable = async () => {
             <Table.Cell>
               <StatusBadge status={issue.status} />
             </Table.Cell>
-            <Table.Cell>{issue.title}</Table.Cell>
+
+            <Table.Cell>
+              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+            </Table.Cell>
+
             <Table.Cell className="hidden md:table-cell">
               {issue.createdAt.toLocaleDateString()}
             </Table.Cell>
