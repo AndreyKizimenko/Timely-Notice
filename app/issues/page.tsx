@@ -1,15 +1,15 @@
-import { Button } from "@radix-ui/themes";
-import Link from "next/link";
 import React from "react";
 import DataTable from "../components/DataTable";
+import IssueActions from "./IssueActions";
 
-const IssuesPage = () => {
+
+const IssuesPage = async () => {
+  
+
   return (
     <div className="flex justify-center">
       <div className="space-y-2 w-5/6">
-        <Button>
-          <Link href="/issues/new">New issue</Link>
-        </Button>
+        <IssueActions />
         <DataTable />
       </div>
     </div>

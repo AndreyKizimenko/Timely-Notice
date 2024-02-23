@@ -1,13 +1,14 @@
+import { Status } from "@prisma/client";
 import { Badge } from "@radix-ui/themes";
 import React from "react";
 
-const StatusBadge = ({ status }: { status: string }) => {
-  switch (status.toLowerCase()) {
-    case "open":
+const StatusBadge = ({ status }: { status: Status }) => {
+  switch (status) {
+    case "OPEN":
       return <Badge color="gray">Open</Badge>;
-    case "closed":
+    case "CLOSED":
       return <Badge color="mint">Closed</Badge>;
-    case "in_progress":
+    case "IN_PROGRESS":
       return <Badge color="blue">In Progress</Badge>;
 
     default:
