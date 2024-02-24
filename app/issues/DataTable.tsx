@@ -1,13 +1,18 @@
-import { Button, Table } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 import React from "react";
 import StatusBadge from "../components/StatusBadge";
 import prisma from "@/prisma/client";
-import Link from "next/link";
+import Link from "../components/Link";
 
 const DataTable = async () => {
   const issueList = await prisma?.issue.findMany({ orderBy: [{ status: "asc" }] });
 
   if (!issueList) return <h1>No issues available</h1>;
+
+  const titleElipsis = (title: string) => {
+    if (title.length < 70) return title;
+    else return title.slice(0, 70) + "...";
+  };
 
   return (
     <Table.Root variant="surface">
@@ -28,7 +33,9 @@ const DataTable = async () => {
             </Table.Cell>
 
             <Table.Cell>
-              <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+              <Link href={`/issues/${issue.id}`}>
+                {titleElipsis(issue.title)}
+              </Link>
             </Table.Cell>
 
             <Table.Cell className="hidden md:table-cell">
