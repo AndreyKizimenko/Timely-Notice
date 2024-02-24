@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Heading, Text } from "@radix-ui/themes";
 import StatusBadge from "@/app/components/StatusBadge";
 
+
 const IssueDetails = async ({ params: { issueID } }: { params: { issueID: string } }) => {
   const issueDetails = await prisma?.issue.findUnique({ where: { id: parseInt(issueID) } });
 

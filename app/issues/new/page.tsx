@@ -1,15 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { Button, Callout, Link, TextArea, TextField } from "@radix-ui/themes";
-import "easymde/dist/easymde.min.css";
-import { z } from "zod";
-import { FieldValues, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import FormError from "@/app/components/FormError";
+import { FormError, Spinner } from "@/app/components";
 import { newIssueSchema } from "@/app/validationSchemas";
-import Spinner from "@/app/components/Spinner";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, TextArea, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
 
 type FormData = z.infer<typeof newIssueSchema>;
 

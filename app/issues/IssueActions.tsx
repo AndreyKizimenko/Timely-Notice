@@ -3,12 +3,10 @@ import Link from "next/link";
 import React from "react";
 
 const IssueActions = async () => {
-  
-
   return (
-    <Button>
-      <Link href="/issues/new">New issue</Link>
-    </Button>
+    <Link href="/issues/new">
+      <Button className="hover:cursor-pointer">New issue</Button>
+    </Link>
   );
 };
 
