@@ -6,7 +6,7 @@ import React from "react";
 const EditIssueButton = ({ issueID }: { issueID: number }) => {
   return (
     <div className="flex">
-      <Link href={`/issues/${issueID}/edit`}>
+      <Link href={`/issues/edit/${issueID}`}>
         <Button>Edit Issue</Button>
       </Link>
     </div>

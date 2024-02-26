@@ -1,8 +1,8 @@
 import { Table } from "@radix-ui/themes";
 import React from "react";
-import StatusBadge from "../components/StatusBadge";
+import StatusBadge from "../../components/StatusBadge";
 import prisma from "@/prisma/client";
-import Link from "../components/Link";
+import Link from "../../components/Link";
 
 const DataTable = async () => {
   const issueList = await prisma?.issue.findMany({ orderBy: [{ status: "asc" }] });
@@ -33,9 +33,7 @@ const DataTable = async () => {
             </Table.Cell>
 
             <Table.Cell>
-              <Link href={`/issues/${issue.id}`}>
-                {titleElipsis(issue.title)}
-              </Link>
+              <Link href={`/issues/${issue.id}`}>{titleElipsis(issue.title)}</Link>
             </Table.Cell>
 
             <Table.Cell className="hidden md:table-cell">
