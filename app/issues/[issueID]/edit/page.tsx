@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import IssueForm from "../../_components/IssueForm";
 import { Heading } from "@radix-ui/themes";
+import prisma from "@/prisma/client";
 
 const EditIssuePage = async ({ params: { issueID } }: { params: { issueID: string } }) => {
   const issueDetails = await prisma?.issue.findUnique({ where: { id: parseInt(issueID) } });
@@ -12,7 +13,7 @@ const EditIssuePage = async ({ params: { issueID } }: { params: { issueID: strin
     <>
       <div className="flex flex-col items-center">
         <Heading className="p-4">Editing issue #{issueID}</Heading>
-        <IssueForm issueDetails={issueDetails} />;
+        <IssueForm issueDetails={issueDetails} />
       </div>
     </>
   );

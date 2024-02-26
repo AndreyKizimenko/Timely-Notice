@@ -24,6 +24,7 @@ const IssueForm = ({ issueDetails }: Props) => {
       if (issueDetails) await axios.patch(`/api/issues/${issueDetails?.id}`, data);
       else await axios.post("/api/issues", data);
       router.push("/issues");
+      router.refresh();
     } catch (error) {
       setError("An unexpected error has occured");
     }
@@ -69,8 +70,9 @@ const IssueForm = ({ issueDetails }: Props) => {
             Adding...
           </Button>
         ) : (
-          <Button type="submit">{!issueDetails ? "Add new issue" : "Update issue"}</Button>
+          <Button type="submit">{issueDetails ? "Update issue" : "Add new issue"}</Button>
         )}
+        
       </form>
     </>
   );

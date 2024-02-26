@@ -1,18 +1,24 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ */
 
-:root {
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '@radix-ui/themes/styles.css';
+/* :root {
   --font-color: 0, 0, 0;
   --foreground-rgb: 255, 255, 255;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --font-color: 255, 255, 255;
     --foreground-rgb: 0, 0, 0;
   }
-} */
+}
 
 body {
   color: rgb(var(--font-color));
@@ -24,3 +30,4 @@ body {
     text-wrap: balance;
   }
 }
+ */

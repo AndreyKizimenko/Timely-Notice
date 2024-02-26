@@ -5,6 +5,7 @@ import IssueDetails from "./IssueDetails";
 import EditIssueButton from "./EditIssueButton";
 import { Grid } from "@radix-ui/themes";
 
+
 const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: string } }) => {
   const issueDetails = await prisma?.issue.findUnique({ where: { id: parseInt(issueID) } });
 
@@ -17,5 +18,6 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
     </Grid>
   );
 };
+
 
 export default IssueDetailsPage;
