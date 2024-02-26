@@ -14,24 +14,15 @@ type FormData = z.infer<typeof newIssueSchema>;
 
 interface Props {
   issueDetails?: Issue;
-  type: "new" | "edit";
 }
 
-const IssueForm = ({ issueDetails, type }: Props) => {
+const IssueForm = ({ issueDetails }: Props) => {
   const [error, setError] = useState("");
   const router = useRouter();
-  const onSubmitNew = async (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     try {
-      await axios.post("/api/issues", data);
-      router.push("/issues");
-    } catch (error) {
-      setError("An unexpected error has occured");
-    }
-  };
-
-  const onSubmitEdit = async (data: FieldValues) => {
-    try {
-      await axios.patch(`/api/issues/${issueDetails?.id}`, data);
+      if (issueDetails) await axios.patch(`/api/issues/${issueDetails?.id}`, data);
+      else await axios.post("/api/issues", data);
       router.push("/issues");
     } catch (error) {
       setError("An unexpected error has occured");
@@ -52,10 +43,7 @@ const IssueForm = ({ issueDetails, type }: Props) => {
         </Callout.Root>
       )}
 
-      <form
-        className="w-2/5"
-        onSubmit={type === "edit" ? handleSubmit(onSubmitEdit) : handleSubmit(onSubmitNew)}
-      >
+      <form className="w-2/5" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
           <TextField.Input
             defaultValue={issueDetails?.title}
@@ -81,7 +69,7 @@ const IssueForm = ({ issueDetails, type }: Props) => {
             Adding...
           </Button>
         ) : (
-          <Button type="submit">{type === "new" ? "Add new issue" : "Update issue"}</Button>
+          <Button type="submit">{!issueDetails ? "Add new issue" : "Update issue"}</Button>
         )}
       </form>
     </>

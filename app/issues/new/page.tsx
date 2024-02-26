@@ -4,7 +4,7 @@ const NewIssuePage = () => {
   return (
     <>
       <div className="flex flex-col items-center">
-        <IssueForm type="new" />;
+        <IssueForm />;
       </div>
     </>
   );

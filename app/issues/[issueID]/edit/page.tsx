@@ -12,7 +12,7 @@ const EditIssuePage = async ({ params: { issueID } }: { params: { issueID: strin
     <>
       <div className="flex flex-col items-center">
         <Heading className="p-4">Editing issue #{issueID}</Heading>
-        <IssueForm type={"edit"} issueDetails={issueDetails} />;
+        <IssueForm issueDetails={issueDetails} />;
       </div>
     </>
   );
