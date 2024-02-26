@@ -13,8 +13,7 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
   return (
     <Grid className="mx-16" columns="2" gap="9">
       <IssueDetails issueDetails={issueDetails} />
-
-      <EditIssueButton issueID={issueDetails.id}/>
+      <EditIssueButton issueDetails={issueDetails} />
     </Grid>
   );
 };
