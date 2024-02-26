@@ -28,11 +28,10 @@ const IssueForm = ({ issueDetails, type }: Props) => {
       setError("An unexpected error has occured");
     }
   };
-  
+
   const onSubmitEdit = async (data: FieldValues) => {
-    const dataWithID = { id: issueDetails?.id, ...data };
     try {
-      await axios.put("/api/issues", dataWithID);
+      await axios.patch(`/api/issues/${issueDetails?.id}`, data);
       router.push("/issues");
     } catch (error) {
       setError("An unexpected error has occured");
@@ -82,7 +81,7 @@ const IssueForm = ({ issueDetails, type }: Props) => {
             Adding...
           </Button>
         ) : (
-          <Button type="submit">Add new issue</Button>
+          <Button type="submit">{type === "new" ? "Add new issue" : "Update issue"}</Button>
         )}
       </form>
     </>
