@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -14,23 +14,17 @@ const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
       router.push("/issues");
       router.refresh();
     } catch (error) {
-      setError("An unexpected error has occured");
+      setError(true);
     }
   };
 
   return (
     <div>
       <AlertDialog.Root>
-        <div className="flex items-center gap-4">
-          <AlertDialog.Trigger>
-            <Button color="red">Delete Issue</Button>
-          </AlertDialog.Trigger>
-          {error && (
-            <Callout.Root size="1" className="w-2/5" color="red">
-              <Callout.Text>{error}</Callout.Text>
-            </Callout.Root>
-          )}
-        </div>
+        <AlertDialog.Trigger>
+          <Button color="red">Delete Issue</Button>
+        </AlertDialog.Trigger>
+
         <AlertDialog.Content style={{ maxWidth: 500 }}>
           <AlertDialog.Title>Delete Issue</AlertDialog.Title>
           <AlertDialog.Description size="2">
@@ -49,6 +43,22 @@ const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
                 Delete issue
               </Button>
             </AlertDialog.Action>
+          </Flex>
+        </AlertDialog.Content>
+      </AlertDialog.Root>
+      <AlertDialog.Root open={error}>
+        <AlertDialog.Content style={{ maxWidth: 500 }}>
+          <AlertDialog.Title>Error</AlertDialog.Title>
+          <AlertDialog.Description size="2">
+            This issue could not be deleted
+          </AlertDialog.Description>
+
+          <Flex gap="3" mt="4" justify="end">
+            <AlertDialog.Cancel>
+              <Button variant="soft" color="gray" onClick={() => setError(false)}>
+                OK
+              </Button>
+            </AlertDialog.Cancel>
           </Flex>
         </AlertDialog.Content>
       </AlertDialog.Root>
