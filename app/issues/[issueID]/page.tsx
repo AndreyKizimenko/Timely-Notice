@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import IssueDetails from "./IssueDetails";
 import EditIssueButton from "./EditIssueButton";
 import { Grid } from "@radix-ui/themes";
-
+import DeleteIssueButton from "./DeleteIssueButton";
 
 const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: string } }) => {
   const issueDetails = await prisma?.issue.findUnique({ where: { id: parseInt(issueID) } });
@@ -12,12 +12,16 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
   if (!issueDetails) notFound();
 
   return (
-    <Grid className="mx-16" columns="2" gap="9">
-      <IssueDetails issueDetails={issueDetails} />
-      <EditIssueButton issueDetails={issueDetails} />
+    <Grid className="mx-16" columns="5" gap="9">
+      <div className="col-span-4">
+        <IssueDetails issueDetails={issueDetails} />
+      </div>
+      <div className="col-span-1 flex flex-col gap-4">
+        <EditIssueButton issueID={issueDetails.id} />
+        <DeleteIssueButton issueID={issueDetails.id} />
+      </div>
     </Grid>
   );
 };
-
 
 export default IssueDetailsPage;

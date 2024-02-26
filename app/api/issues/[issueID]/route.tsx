@@ -21,7 +21,20 @@ export async function PATCH(request: NextRequest, { params }: { params: { issueI
     });
     return NextResponse.json(updatedIssue, { status: 200 });
   } catch (error) {
-    console.log("failed update");
+    return NextResponse.json(error, { status: 400 });
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { issueID: string } }) {
+  const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.issueID) } });
+  if (!issue) return NextResponse.json({ error: "Invalid issue" }, { status: 404 });
+
+  try {
+    await prisma.issue.delete({
+      where: { id: issue.id },
+    });
+    return NextResponse.json({});
+  } catch (error) {
     return NextResponse.json(error, { status: 400 });
   }
 }
