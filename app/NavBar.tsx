@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import React from "react";
 import { useSession } from "next-auth/react";
-import { Heading } from "@radix-ui/themes";
+
 
 const NavBar = () => {
   const { status } = useSession();
@@ -51,7 +51,7 @@ const NavBar = () => {
       {status === "unauthenticated" && (
         <div>
           <Link
-            href={"/api/auth/signin"}
+            href={"/auth/signin"}
             className={classNames({
               "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
               "bg-slate-100": pathname === "/api/auth/signin",
@@ -60,7 +60,7 @@ const NavBar = () => {
             Sign In
           </Link>
           <Link
-            href={"/api/auth/signup"}
+            href={"/auth/signup"}
             className={classNames({
               "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
               "bg-slate-100": pathname === "/api/auth/signin",

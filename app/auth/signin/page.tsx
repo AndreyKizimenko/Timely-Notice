@@ -4,7 +4,7 @@ import { loginSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
-import { FormError, Spinner } from "@/app/components";
+import { FormError } from "@/app/components";
 import SubmitButton from "@/app/components/SubmitButton";
 import Link from "next/link";
 type FormData = z.infer<typeof loginSchema>;
