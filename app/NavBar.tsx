@@ -49,15 +49,26 @@ const NavBar = () => {
       </div>
 
       {status === "unauthenticated" && (
-        <Link
-          href={"/api/auth/signin"}
-          className={classNames({
-            "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
-            "bg-slate-100": pathname === "/api/auth/signin",
-          })}
-        >
-          Sign In
-        </Link>
+        <div>
+          <Link
+            href={"/api/auth/signin"}
+            className={classNames({
+              "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
+              "bg-slate-100": pathname === "/api/auth/signin",
+            })}
+          >
+            Sign In
+          </Link>
+          <Link
+            href={"/api/auth/signup"}
+            className={classNames({
+              "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
+              "bg-slate-100": pathname === "/api/auth/signin",
+            })}
+          >
+            Sign Up
+          </Link>
+        </div>
       )}
       {status === "authenticated" && (
         <Link

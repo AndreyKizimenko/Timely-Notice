@@ -63,7 +63,7 @@ const IssueForm = ({ issueDetails }: Props) => {
           aria-invalid={errors.description ? "true" : "false"}
         />
         {errors.description && <FormError>{errors.description.message}</FormError>}
-
+        
         {isSubmitting ? (
           <Button disabled type="submit">
             <Spinner />
