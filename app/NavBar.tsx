@@ -5,8 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import React from "react";
-import { useSession } from "next-auth/react";
-
+import { signOut, useSession } from "next-auth/react";
 
 const NavBar = () => {
   const { status } = useSession();
@@ -73,6 +72,10 @@ const NavBar = () => {
       {status === "authenticated" && (
         <Link
           href={"/api/auth/signout"}
+          onClick={(e) => {
+            e.preventDefault();
+            signOut();
+          }}
           className={classNames({
             "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
             "bg-slate-100": pathname === "/api/auth/signin",

@@ -16,8 +16,8 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { type: "email" },
-        password: { type: "password" },
+        email: { label: "Email", type: "email", placeholder: "Email" },
+        password: { label: "Password", type: "password", placeholder: "Password" },
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials.password) return null;
@@ -36,6 +36,7 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "../../auth/signin",
+    error: "../../auth/signin"
   },
 };
 

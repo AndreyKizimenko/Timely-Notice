@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { FormError } from "@/app/components";
 import SubmitButton from "@/app/components/SubmitButton";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 
@@ -48,13 +48,12 @@ const SignUpPage = () => {
   };
   return (
     <>
-      {error && (
-        <Callout.Root size="1" className="w-2/5 mb-4" color="red">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )}
-
       <form className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
+        {error && (
+          <Callout.Root size="1" className="w-2/5 mb-4" color="red">
+            <Callout.Text>{error}</Callout.Text>
+          </Callout.Root>
+        )}
         <Heading>Sign Up</Heading>
         <div className="w-2/5 flex flex-col gap-2">
           <div className="flex justify-between">
