@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
+import { DropdownMenu, Button, Text } from "@radix-ui/themes";
 
 const NavBar = () => {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
 
   const links = [
     { label: "Home", href: "/" },
@@ -46,44 +47,40 @@ const NavBar = () => {
           ))}
         </ul>
       </div>
-
-      {status === "unauthenticated" && (
-        <div>
-          <Link
-            href={"/auth/signin"}
-            className={classNames({
-              "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
-              "bg-slate-100": pathname === "/api/auth/signin",
-            })}
-          >
-            Sign In
-          </Link>
-          <Link
-            href={"/auth/signup"}
-            className={classNames({
-              "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
-              "bg-slate-100": pathname === "/api/auth/signin",
-            })}
-          >
-            Sign Up
-          </Link>
-        </div>
-      )}
-      {status === "authenticated" && (
-        <Link
-          href={"/api/auth/signout"}
-          onClick={(e) => {
-            e.preventDefault();
-            signOut();
-          }}
-          className={classNames({
-            "text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all": true,
-            "bg-slate-100": pathname === "/api/auth/signin",
-          })}
-        >
-          Sign Out
-        </Link>
-      )}
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Button variant="soft">Authentication</Button>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          {status === "unauthenticated" && (
+            <>
+              <DropdownMenu.Item>
+                <Link href={"/auth/signin"}>Sign In</Link>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item>
+                {" "}
+                <Link href={"/auth/signup"}>Sign Up</Link>
+              </DropdownMenu.Item>
+            </>
+          )}
+          {status === "authenticated" && (
+            <>
+              <p className="text-sm p-2">{session.user?.email}</p>
+              <DropdownMenu.Item>
+                <Link
+                  href={"/api/auth/signout"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  Sign Out
+                </Link>
+              </DropdownMenu.Item>
+            </>
+          )}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </nav>
   );
 };
