@@ -5,6 +5,7 @@ import IssueDetails from "./IssueDetails";
 import EditIssueButton from "./EditIssueButton";
 import { Grid } from "@radix-ui/themes";
 import DeleteIssueButton from "./DeleteIssueButton";
+import AssigneeDropdown from "./AssigneeDropdown";
 
 const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: string } }) => {
   const issueDetails = await prisma?.issue.findUnique({ where: { id: parseInt(issueID) } });
@@ -19,6 +20,7 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
       <div className="col-span-1 flex flex-col gap-4">
         <EditIssueButton issueID={issueDetails.id} />
         <DeleteIssueButton issueID={issueDetails.id} />
+        <AssigneeDropdown />
       </div>
     </Grid>
   );
