@@ -8,6 +8,12 @@
 @import 'tailwindcss/utilities';
 
 @import '@radix-ui/themes/styles.css';
+
+@layer utilities {
+  .nav-link {
+    @apply text-zinc-500 p-2 rounded-lg hover:text-zinc-800 transition-all
+  }
+}
 /* :root {
   --font-color: 0, 0, 0;
   --foreground-rgb: 255, 255, 255;
