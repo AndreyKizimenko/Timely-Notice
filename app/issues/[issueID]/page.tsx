@@ -20,7 +20,7 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
       <div className="col-span-1 flex flex-col gap-4">
         <EditIssueButton issueID={issueDetails.id} />
         <DeleteIssueButton issueID={issueDetails.id} />
-        <AssigneeDropdown />
+        <AssigneeDropdown issueID={issueDetails.id} assignedToUserID={issueDetails.assignedToUserID} />
       </div>
     </Grid>
   );

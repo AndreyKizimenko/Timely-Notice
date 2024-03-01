@@ -10,6 +10,19 @@ export const newIssueSchema = z.object({
   description: z.string().min(5, { message: "Description should be at least 5 characters long" }),
 });
 
+export const patchIssueSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: "Title needs to be at least 1 character" })
+    .max(255, { message: "Title can not be longer than 255 characters" })
+    .optional(),
+  description: z
+    .string()
+    .min(5, { message: "Description should be at least 5 characters long" })
+    .optional(),
+  assignedToUserID: z.string().min(1, { message: "Assignee is required" }).optional().nullable(),
+});
+
 // Auth validations
 const passwordSchema = z
   .string()
@@ -27,7 +40,7 @@ const passwordSchema = z
 
 export const registerSchema = z
   .object({
-    name: z.string().min(1, {message: "Name is required"}),
+    name: z.string().min(1, { message: "Name is required" }),
     email: z.string().email({ message: "Invalid email address" }).trim(),
     password: passwordSchema,
     confirmPassword: passwordSchema,
