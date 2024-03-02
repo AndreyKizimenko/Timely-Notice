@@ -33,6 +33,7 @@ const AssigneeDropdown = ({ issueID, assignedToUserID }: Props) => {
   return (
     <>
       <Select.Root
+        
         defaultValue={assignedToUserID ? assignedToUserID : "unassigned"}
         onValueChange={(value) => handleUpdate(value)}
       >
