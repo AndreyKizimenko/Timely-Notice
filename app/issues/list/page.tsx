@@ -5,9 +5,10 @@ import Link from "../../components/Link";
 import StatusBadge from "../../components/StatusBadge";
 import IssueActions from "./IssueActions";
 import NextLink from "next/link";
+import Pagination from "@/app/components/Pagination";
 
 interface Props {
-  searchParams: { status: Status; orderBy: keyof Issue };
+  searchParams: { status: Status; orderBy: keyof Issue; page: string };
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -22,13 +23,17 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const orderBy = headers.map((header) => header.value).includes(searchParams.orderBy)
     ? { [searchParams.orderBy]: "asc" }
     : undefined;
+  const currentPage = parseInt(
+    searchParams.page && !isNaN(parseInt(searchParams.page)) ? searchParams.page : "1"
+  );
+  const pageSize = 15;
 
   const issueList = await prisma?.issue.findMany({
     where: { status: status },
     orderBy,
   });
-
   if (!issueList) return <h1>No issues available</h1>;
+  const pageItems = issueList.slice(currentPage * pageSize - pageSize, currentPage * pageSize);
 
   const titleElipsis = (title: string) => {
     if (title.length < 70) return title;
@@ -57,7 +62,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
           </Table.Header>
 
           <Table.Body>
-            {issueList.map((issue) => (
+            {pageItems.map((issue) => (
               <Table.Row key={issue.id}>
                 <Table.Cell>
                   <StatusBadge status={issue.status} />
@@ -67,16 +72,13 @@ const IssuesPage = async ({ searchParams }: Props) => {
                   <Link href={`/issues/${issue.id}`}>{titleElipsis(issue.title)}</Link>
                 </Table.Cell>
 
-                <Table.Cell className="hidden md:table-cell">
-                  {issue.createdAt.toLocaleDateString()}
-                </Table.Cell>
-                <Table.Cell className="hidden md:table-cell">
-                  {issue.updatedAt.toLocaleDateString()}
-                </Table.Cell>
+                <Table.Cell>{issue.createdAt.toLocaleDateString()}</Table.Cell>
+                <Table.Cell>{issue.updatedAt.toLocaleDateString()}</Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
         </Table.Root>
+        <Pagination currentPage={currentPage} itemCount={issueList.length} pageSize={pageSize} />
       </div>
     </div>
   );
