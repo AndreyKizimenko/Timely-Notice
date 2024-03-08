@@ -6,6 +6,7 @@ import StatusBadge from "../../components/StatusBadge";
 import IssueActions from "./IssueActions";
 import NextLink from "next/link";
 import Pagination from "@/app/components/Pagination";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: { status: Status; orderBy: keyof Issue; page: string };
@@ -29,7 +30,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const pageSize = 15;
 
   const issueList = await prisma?.issue.findMany({
-    where: { status: status },    
+    where: { status: status },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });
@@ -86,4 +87,9 @@ const IssuesPage = async ({ searchParams }: Props) => {
 };
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issue tracker - List",
+  description: "View all project issues",
+};
 export default IssuesPage;

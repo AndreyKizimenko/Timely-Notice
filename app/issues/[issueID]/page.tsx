@@ -19,10 +19,21 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
       <div className="col-span-1 flex flex-col gap-4">
         <EditIssueButton issueID={issueDetails.id} />
         <DeleteIssueButton issueID={issueDetails.id} />
-        <AssigneeDropdown issueID={issueDetails.id} assignedToUserID={issueDetails.assignedToUserID} />
+        <AssigneeDropdown
+          issueID={issueDetails.id}
+          assignedToUserID={issueDetails.assignedToUserID}
+        />
       </div>
     </Grid>
   );
 };
+
+export async function generateMetadata({ params }: { params: { issueID: string } }) {
+  const issue = await prisma.issue.findUnique({ where: { id: parseInt(params.issueID) } });
+  return {
+    title: issue?.title,
+    description: "Details of issue " + issue?.id,
+  };
+}
 
 export default IssueDetailsPage;
