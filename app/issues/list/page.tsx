@@ -29,11 +29,12 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const pageSize = 15;
 
   const issueList = await prisma?.issue.findMany({
-    where: { status: status },
-    orderBy,
+    where: { status: status },    
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
   });
+  const totalIssues = await prisma.issue.count({ where: { status: status }, orderBy });
   if (!issueList) return <h1>No issues available</h1>;
-  const pageItems = issueList.slice(currentPage * pageSize - pageSize, currentPage * pageSize);
 
   const titleElipsis = (title: string) => {
     if (title.length < 70) return title;
@@ -62,7 +63,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
           </Table.Header>
 
           <Table.Body>
-            {pageItems.map((issue) => (
+            {issueList.map((issue) => (
               <Table.Row key={issue.id}>
                 <Table.Cell>
                   <StatusBadge status={issue.status} />
@@ -78,7 +79,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
             ))}
           </Table.Body>
         </Table.Root>
-        <Pagination currentPage={currentPage} itemCount={issueList.length} pageSize={pageSize} />
+        <Pagination currentPage={currentPage} itemCount={totalIssues} pageSize={pageSize} />
       </div>
     </div>
   );

@@ -19,11 +19,9 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   if (totalPages <= 1) return null;
 
   const setSearchQuery = (nextPage: number) => {
-    const params = new URLSearchParams();
-    if (searchParams.get("orderBy")) params.append("orderBy", searchParams.get("orderBy")!);
-    if (searchParams.get("status")) params.append("status", searchParams.get("status")!);
+    const params = new URLSearchParams(searchParams);
+    params.set("page", nextPage.toString());
 
-    params.append("page", nextPage.toString());
     const query = params.size ? "?" + params.toString() : "";
 
     router.push("/issues/list" + query);
