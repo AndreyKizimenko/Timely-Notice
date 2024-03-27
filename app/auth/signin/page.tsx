@@ -46,7 +46,7 @@ const SignInPage = () => {
             {errors.email && <FormError>{errors.email.message}</FormError>}
           </div>
           <TextField.Input
-            defaultValue={"andreykizimenko5@gmail.com"}
+            
             type="email"
             placeholder="Enter your email"
             {...register("email", { required: true })}
@@ -57,7 +57,7 @@ const SignInPage = () => {
           </div>
 
           <TextField.Input
-            defaultValue={"TestTest1!"}
+            
             type="password"
             placeholder="Enter your password"
             {...register("password", { required: true })}
