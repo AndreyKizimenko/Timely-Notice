@@ -12,8 +12,7 @@ const NavBar = () => {
   const { status, data: session } = useSession();
 
   const links = [
-    { label: "Home", href: "/" },
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "Dashboard", href: "/" },
     { label: "Issues", href: "/issues/list" },
   ];
   const pathname = usePathname();
