@@ -34,7 +34,7 @@ const SignInPage = () => {
   return (
     <>
       <form className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
-        <Heading>Sign In</Heading>
+        <Heading data-cy="signin-heading">Sign In</Heading>
         {!!loginError && (
           <Callout.Root size="1" className="w-2/5 mb-4" color="red">
             <Callout.Text>Authentication Failed</Callout.Text>
@@ -46,7 +46,7 @@ const SignInPage = () => {
             {errors.email && <FormError>{errors.email.message}</FormError>}
           </div>
           <TextField.Input
-            
+            data-cy="email-input"
             type="email"
             placeholder="Enter your email"
             {...register("email", { required: true })}
@@ -57,21 +57,23 @@ const SignInPage = () => {
           </div>
 
           <TextField.Input
-            
+            data-cy="password-input"
             type="password"
             placeholder="Enter your password"
             {...register("password", { required: true })}
           />
 
           <div className="flex justify-between mt-2">
-            <SubmitButton
+            <SubmitButton            
               isSubmitting={isSubmitting}
               defaultText="Sign In"
               submittingText="Signing in..."
             />
             <div>
               <Link href={"/auth/signup"}>
-                <Button variant="outline">Create a new account</Button>
+                <Button data-cy="register-button" variant="outline">
+                  Create a new account
+                </Button>
               </Link>
             </div>
           </div>

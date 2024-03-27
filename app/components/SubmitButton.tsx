@@ -10,7 +10,7 @@ interface Props {
 
 const SubmitButton = ({isSubmitting, defaultText, submittingText} : Props) => {
   return (
-    <Button disabled={isSubmitting} type="submit">
+    <Button data-cy="submit-button" disabled={isSubmitting} type="submit">
       {isSubmitting && <Spinner />}
       {isSubmitting ? submittingText : defaultText}
     </Button>

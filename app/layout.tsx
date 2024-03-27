@@ -11,7 +11,7 @@ import ReactQueryClientProvider from "./ReactQueryClientProvider";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "My Jira",
+  title: "Issue tracker",
   description: "Bug tracking system",
 };
 
