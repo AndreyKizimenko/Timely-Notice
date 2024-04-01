@@ -1,19 +1,29 @@
 /// <reference types="cypress" />
 interface NewAccount {
-  userName: String;
-  userEmail: String;
-  userPassword: String;
+  userName?: string;
+  userEmail?: string;
+  userPassword?: string;
+  userRepeatPassword?: string;
 }
 
 declare namespace Cypress {
   interface Chainable {
     getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
     updateAccountsArray(newAccount: NewAccount): Chainable<void>;
+    registerUser(newAccount: NewAccount): Chainable<void>;
   }
 }
 
 Cypress.Commands.add("getByData", (selector) => {
   return cy.get(`[data-cy=${selector}]`);
+});
+
+Cypress.Commands.add("registerUser", (newAccount: NewAccount) => {
+  newAccount.userName && cy.getByData("name-input").type(newAccount.userName);
+  newAccount.userEmail && cy.getByData("email-input").type(newAccount.userEmail);
+  newAccount.userPassword && cy.getByData("password-input").type(newAccount.userPassword);  
+  newAccount.userRepeatPassword && cy.getByData("password-confirm-input").type(newAccount.userRepeatPassword);  
+  cy.getByData("submit-button").click();
 });
 
 Cypress.Commands.add("updateAccountsArray", (newAccount) => {

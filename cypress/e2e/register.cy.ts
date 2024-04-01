@@ -1,17 +1,15 @@
 import { faker } from "@faker-js/faker";
 
 type NewAccount = {
-  userName: string;
-  userEmail: string;
-  userPassword: string;
+  userName?: string;
+  userEmail?: string;
+  userPassword?: string;
+  userRepeatPassword?: string;
 };
 
 const passwords = ["Test@1234", "P@ssw0rd!", "Secret123#", "SecurePwd789*", "RandomP@ss1"];
 
 describe("Core authentication", () => {
-  let validAccounts: ValidAccounts;
-  let invalidAccoutns: InvalidAccounts;
-
   context("Accessing the Sign Up page", () => {
     afterEach(() => {
       cy.location("pathname").should("eq", "/auth/signup");
@@ -40,26 +38,22 @@ describe("Core authentication", () => {
     });
 
     it("Valid email and valid password", () => {
-      const newAccount = {
+      let newAccount: NewAccount = {
         userName: faker.person.fullName(),
         userEmail: faker.internet.email(),
         userPassword: passwords[Math.floor(Math.random() * passwords.length)],
       };
+      newAccount.userRepeatPassword = newAccount.userPassword;
 
-      cy.getByData("name-input").type(newAccount.userName);
-      cy.getByData("email-input").type(newAccount.userEmail);
-      cy.getByData("password-input").type(newAccount.userPassword);
-      cy.getByData("password-confirm-input").type(newAccount.userPassword);
-
+      cy.registerUser(newAccount);
       cy.updateAccountsArray(newAccount);
-      cy.getByData("submit-button").click();
 
       cy.location("pathname").should("eq", "/");
       cy.title().should("eq", "Issue tracker - Dashboard");
     });
   });
 
-  context.only("Registering a new account - Negative", () => {
+  context("Registering a new account - Negative", () => {
     let newAccount: NewAccount;
     beforeEach(() => {
       newAccount = newAccount = {
@@ -67,12 +61,69 @@ describe("Core authentication", () => {
         userEmail: faker.internet.email(),
         userPassword: passwords[Math.floor(Math.random() * passwords.length)],
       };
+      newAccount.userRepeatPassword = newAccount.userPassword;
       cy.visit("http://localhost:3000/auth/signup");
     });
 
-    it("Regestering with all empty fields", () => {
-      cy.getByData("submit-button").click();
-      
+    afterEach(() => {
+      cy.location("pathname").should("eq", "/auth/signup");
     });
+
+    it("All fields empty ", () => {
+      cy.getByData("submit-button").click();
+      cy.getByData("signup-form").get("p").should("have.length", 4);
+    });
+
+    it("Name field empty", () => {
+      delete newAccount.userName;
+      cy.registerUser(newAccount);
+      cy.getByData("signup-form").get("p").contains("Name");
+    });
+
+    it("Email field empty", () => {
+      delete newAccount.userEmail;
+      cy.registerUser(newAccount);
+      cy.getByData("signup-form").get("p").contains("email");
+    });
+
+    it("Password field empty", () => {
+      delete newAccount.userPassword;
+      cy.registerUser(newAccount);
+      cy.getByData("signup-form").get("p").contains("Password");
+    });
+
+    it("Repeat password field empty", () => {
+      delete newAccount.userRepeatPassword;
+      cy.registerUser(newAccount);
+      cy.getByData("signup-form").get("p").contains("Password");
+    });
+
+    it("Repeat password mismatch", () => {
+      newAccount.userRepeatPassword = newAccount.userPassword + "X";
+      cy.registerUser(newAccount);
+      cy.getByData("signup-form").get("p").contains("match");
+    });
+
+    for (let index = 0; index < 5; index++) {
+      it("Invalid email", () => {
+        cy.fixture("invalid_accounts").then((data) => {
+          newAccount.userEmail = data.invalid_emails[index];
+          cy.registerUser(newAccount);
+          cy.focused().should("have.attr", "data-cy", "email-input")
+        });
+      });
+    }
+
+    for (let index = 0; index < 6; index++) {
+      it("Invalid password", () => {
+        cy.fixture("invalid_accounts").then((data) => {
+          newAccount.userPassword = data.invalid_passwords[index];
+          newAccount.userRepeatPassword = data.invalid_passwords[index];
+          cy.registerUser(newAccount);
+          cy.getByData("signup-form").get("p").contains("Password");
+        });
+      });
+    }
+    
   });
 });

@@ -1,47 +1,18 @@
 {
-  "invalid_email_valid_password": [
-    {
-      "email": "invalidemail1.com",
-      "password": "InvalidPwd1!"
-    },
-    {
-      "email": "user@invalid@domain.com",
-      "password": "Inv@lidPwd2"
-    },
-    {
-      "email": "missingatdomain.com",
-      "password": "InvalidPassword3!"
-    },
-    {
-      "email": "noatdomaincom",
-      "password": "Inval1dPwd4!"
-    },
-    {
-      "email": "@nodomain.com",
-      "password": "Inv@lidPwd5"
-    }
+  "invalid_emails": [
+    "invalidemail1.com",
+    "user@invalid@domain.com",
+    "missingatdomain.com",
+    "noatdomaincom",
+    "@nodomain.com"
   ],
 
-  "valid_email_invalid_password": [
-    {
-      "email": "testaccount1@example.com",
-      "password": "InvalidPwd1!"
-    },
-    {
-      "email": "user1234@testmail.com",
-      "password": "Inv@lidPwd2"
-    },
-    {
-      "email": "randomemail99@mailservice.com",
-      "password": "InvalidPassword3!"
-    },
-    {
-      "email": "sampleuser@emailprovider.net",
-      "password": "Inval1dPwd4!"
-    },
-    {
-      "email": "myaccount@emailhosting.org",
-      "password": "Inv@lidPwd5"
-    }
+  "invalid_passwords": [
+    "passw0rd",
+    "Aa1!Bb2@Cc3#Dd4$Ee5%Ff6^Gg7&Hh8*Ii9(Jj0)KkLl",
+    "123456789!",
+    "abcdefg123!",
+    "AbCdEfGhIj!",
+    "Abcdefg123"
   ]
 }

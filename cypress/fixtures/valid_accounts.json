@@ -14,6 +14,78 @@
       "userName": "Orlando Murphy",
       "userEmail": "Anissa.Kris93@hotmail.com",
       "userPassword": "Test@1234"
+    },
+    {
+      "userName": "Jan Fay",
+      "userEmail": "Deanna_Cummings@yahoo.com",
+      "userPassword": "SecurePwd789*"
+    },
+    {
+      "userName": "Adrienne Wintheiser",
+      "userEmail": "Ethelyn.Towne63@yahoo.com",
+      "userPassword": "Secret123#"
+    },
+    {
+      "userName": "Loretta Okuneva",
+      "userEmail": "Fiona_Kris28@gmail.com",
+      "userPassword": "RandomP@ss1"
+    },
+    {
+      "userName": "Miriam Murphy",
+      "userEmail": "Crystel.White@hotmail.com",
+      "userPassword": "RandomP@ss1"
+    },
+    {
+      "userName": "Dr. Faye Hilpert",
+      "userEmail": "Jamey59@gmail.com",
+      "userPassword": "Secret123#"
+    },
+    {
+      "userName": "Betty Cummerata",
+      "userEmail": "Roger63@gmail.com",
+      "userPassword": "SecurePwd789*"
+    },
+    {
+      "userName": "Mr. Larry Rau",
+      "userEmail": "Eveline67@gmail.com",
+      "userPassword": "Test@1234"
+    },
+    {
+      "userName": "Margie Watsica",
+      "userEmail": "Hayden.Deckow@gmail.com",
+      "userPassword": "RandomP@ss1"
+    },
+    {
+      "userName": "Matthew Schiller",
+      "userEmail": "Bartholome20@gmail.com",
+      "userPassword": "P@ssw0rd!"
+    },
+    {
+      "userName": "Gene Feeney",
+      "userEmail": "Carmelo14@hotmail.com",
+      "userPassword": "Test@1234"
+    },
+    {
+      "userName": "Clyde Berge",
+      "userEmail": "Colby.Zulauf@gmail.com",
+      "userPassword": "SecurePwd789*"
+    },
+    {
+      "userName": "Casey Reichert",
+      "userEmail": "Ilene_Ankunding15@hotmail.com",
+      "userPassword": "SecurePwd789*"
+    },
+    {
+      "userName": "Mr. Alfredo Hammes",
+      "userEmail": "Anabelle_Marquardt@gmail.com",
+      "userPassword": "Test@1234",
+      "userRepeatPassword": "Test@1234"
+    },
+    {
+      "userName": "Carlos Skiles",
+      "userEmail": "Dana_Nikolaus63@gmail.com",
+      "userPassword": "RandomP@ss1",
+      "userRepeatPassword": "RandomP@ss1"
     }
   ]
 }
