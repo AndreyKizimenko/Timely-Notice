@@ -3,10 +3,8 @@ type Account = {
   userPassword: string;
 };
 
-interface ValidAccounts {
-  registered_accounts: Account[];
-  valid_passwords: string[];
-}
+type ValidAccounts = Account[];
+
 interface InvalidAccounts {
   invalid_email_valid_password: Account[];
   valid_email_invalid_password: Account[];
@@ -27,7 +25,6 @@ describe("Core authentication", () => {
     });
 
     cy.visit("http://localhost:3000/auth/signin");
-    
   });
 
   context("Page elements", () => {
@@ -40,13 +37,29 @@ describe("Core authentication", () => {
     });
   });
 
-  context("Sign in flow", () => {
-    it("Checking sign in", () => {
-      cy.getByData("email-input").type(validAccounts.registered_accounts[1].userEmail);
-      cy.getByData("password-input").type(validAccounts.registered_accounts[1].userPassword);
-      cy.getByData("submit-button").click();
-      cy.location("pathname").should("eq", "/"); 
-      cy.title().should("eq", "Issue tracker - Dashboard");     
+  context.only("Sign in flow - Positive", () => {
+    const numberOfAccounts = 5;
+    let registeredAccounts: ValidAccounts;
+
+    before(() => {
+      cy.fixture("valid_accounts.json").then((data) => {
+        registeredAccounts = data.registered_accounts.slice(0, numberOfAccounts);
+      });
     });
+
+    for (let i = 0; i < numberOfAccounts; i++) {
+      it("Checking sign in", () => {
+        cy.signIn(registeredAccounts[i]);
+        cy.location("pathname").should("eq", "/");
+        cy.title().should("eq", "Issue tracker - Dashboard");
+
+        cy.getByData("auth-dropdown").click();
+        cy.getByData("auth-signout").click();
+
+        cy.location("pathname").should("include", "signin");
+        cy.title().should("eq", "Issue tracker");
+        cy.getByData("signin-heading").should("exist").contains("Sign In");
+      });
+    }
   });
 });
