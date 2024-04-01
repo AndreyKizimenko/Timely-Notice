@@ -22,6 +22,7 @@ const NavBar = () => {
       <div className="flex space-x-10 ">
         <Link href="/">
           <Image
+            data-cy="navbar-log"
             src="/favicon.ico"
             alt="logo"
             width={50}
@@ -34,6 +35,7 @@ const NavBar = () => {
         <ul className="flex space-x-6 text-lg">
           {links.map((link) => (
             <Link
+              data-cy={`navbar-${link.label}`}
               key={link.label}
               href={link.href}
               className={classNames({
@@ -48,17 +50,23 @@ const NavBar = () => {
       </div>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <Button variant="soft">Authentication</Button>
+          <Button data-cy={"auth-dropdown"} variant="soft">
+            Authentication
+          </Button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
           {status === "unauthenticated" && (
             <>
               <DropdownMenu.Item>
-                <Link href={"/auth/signin"}>Sign In</Link>
+                <Link data-cy={"auth-signin"} href={"/auth/signin"}>
+                  Sign In
+                </Link>
               </DropdownMenu.Item>
               <DropdownMenu.Item>
                 {" "}
-                <Link href={"/auth/signup"}>Sign Up</Link>
+                <Link data-cy={"auth-signup"} href={"/auth/signup"}>
+                  Sign Up
+                </Link>
               </DropdownMenu.Item>
             </>
           )}
@@ -67,6 +75,7 @@ const NavBar = () => {
               <p className="text-sm p-2">{session.user?.email}</p>
               <DropdownMenu.Item>
                 <Link
+                  data-cy={"auth-signout"}
                   href={"/api/auth/signout"}
                   onClick={(e) => {
                     e.preventDefault();

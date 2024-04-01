@@ -48,19 +48,20 @@ const SignUpPage = () => {
   };
   return (
     <>
-      <form className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
+      <form data-cy="signup-form" className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
         {error && (
           <Callout.Root size="1" className="w-2/5 mb-4" color="red">
             <Callout.Text>{error}</Callout.Text>
           </Callout.Root>
         )}
-        <Heading>Sign Up</Heading>
+        <Heading data-cy="signup-heading">Sign Up</Heading>
         <div className="w-2/5 flex flex-col gap-2">
           <div className="flex justify-between">
             <label htmlFor="name">Name</label>
             {errors.name && <FormError>{errors.name.message}</FormError>}
           </div>
           <TextField.Input
+            data-cy="name-input"
             type="text"
             placeholder="Enter your name"
             {...register("name", { required: true })}
@@ -71,6 +72,7 @@ const SignUpPage = () => {
             {errors.email && <FormError>{errors.email.message}</FormError>}
           </div>
           <TextField.Input
+            data-cy="email-input"
             type="email"
             placeholder="Enter your email"
             {...register("email", { required: true })}
@@ -81,6 +83,7 @@ const SignUpPage = () => {
             {errors.password && <FormError>{errors.password.message}</FormError>}
           </div>
           <TextField.Input
+            data-cy="password-input"
             type="password"
             placeholder="Enter your password"
             {...register("password", { required: true })}
@@ -91,12 +94,14 @@ const SignUpPage = () => {
             {errors.confirmPassword && <FormError>{errors.confirmPassword.message}</FormError>}
           </div>
           <TextField.Input
+            data-cy="password-confirm-input"
             type="password"
             placeholder="Confirm your password"
             {...register("confirmPassword", { required: true })}
           />
           <div>
             <SubmitButton
+              data-cy="submit-button"
               isSubmitting={isSubmitting}
               defaultText="Sign Up"
               submittingText="Signing up..."

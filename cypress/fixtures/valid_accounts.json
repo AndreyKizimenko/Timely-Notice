@@ -1,0 +1,19 @@
+{
+  "registered_accounts": [
+    {
+      "userName": "Santiago Braun",
+      "userEmail": "Susana45@gmail.com",
+      "userPassword": "SecurePwd789*"
+    },
+    {
+      "userName": "Maria Treutel",
+      "userEmail": "Toney_Stiedemann@yahoo.com",
+      "userPassword": "Test@1234"
+    },
+    {
+      "userName": "Orlando Murphy",
+      "userEmail": "Anissa.Kris93@hotmail.com",
+      "userPassword": "Test@1234"
+    }
+  ]
+}

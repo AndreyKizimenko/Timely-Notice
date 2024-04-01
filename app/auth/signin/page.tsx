@@ -33,7 +33,7 @@ const SignInPage = () => {
 
   return (
     <>
-      <form className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
+      <form data-cy="signin-form" className="flex flex-col items-center gap-10" onSubmit={handleSubmit(onSubmit)}>
         <Heading data-cy="signin-heading">Sign In</Heading>
         {!!loginError && (
           <Callout.Root size="1" className="w-2/5 mb-4" color="red">
