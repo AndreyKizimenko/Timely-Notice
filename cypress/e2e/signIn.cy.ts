@@ -51,7 +51,7 @@ describe("Core authentication", () => {
     }
   });
 
-  context.only("Sign in flow - Negative", () => {
+  context("Sign in flow - Negative", () => {
     afterEach(() => {
       cy.location("pathname").should("eq", "/auth/signin");
     });
