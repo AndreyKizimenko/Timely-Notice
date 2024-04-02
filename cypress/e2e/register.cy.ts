@@ -40,6 +40,7 @@ describe("Core authentication", () => {
     it("Valid email and valid password", () => {
       let newAccount: NewAccount = {
         userName: faker.person.fullName(),
+        
         userEmail: faker.internet.email(),
         userPassword: passwords[Math.floor(Math.random() * passwords.length)],
       };

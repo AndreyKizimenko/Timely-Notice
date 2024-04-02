@@ -37,7 +37,7 @@ const SignInPage = () => {
         <Heading data-cy="signin-heading">Sign In</Heading>
         {!!loginError && (
           <Callout.Root size="1" className="w-2/5 mb-4" color="red">
-            <Callout.Text>Authentication Failed</Callout.Text>
+            <Callout.Text data-cy="auth-warning">Authentication Failed</Callout.Text>
           </Callout.Root>
         )}
         <div className="w-2/5 flex flex-col gap-2">
