@@ -29,20 +29,36 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
 
   return (
     <div className="flex gap-2 items-center py-4">
-      <Button disabled={currentPage === 1} onClick={() => setSearchQuery(1)}>
+      <Button
+        data-cy="pagination-first"
+        disabled={currentPage === 1}
+        onClick={() => setSearchQuery(1)}
+      >
         <RxDoubleArrowLeft />
       </Button>
-      <Button disabled={currentPage === 1} onClick={() => setSearchQuery(currentPage - 1)}>
+      <Button
+        data-cy="pagination-previous"
+        disabled={currentPage === 1}
+        onClick={() => setSearchQuery(currentPage - 1)}
+      >
         <MdKeyboardArrowLeft />
       </Button>
 
       <Text size={"1"}>
         Page {currentPage} / {totalPages}
       </Text>
-      <Button disabled={currentPage === totalPages} onClick={() => setSearchQuery(currentPage + 1)}>
+      <Button
+        data-cy="pagination-next"
+        disabled={currentPage === totalPages}
+        onClick={() => setSearchQuery(currentPage + 1)}
+      >
         <MdKeyboardArrowRight />
       </Button>
-      <Button disabled={currentPage === totalPages} onClick={() => setSearchQuery(totalPages)}>
+      <Button
+        data-cy="pagination-last"
+        disabled={currentPage === totalPages}
+        onClick={() => setSearchQuery(totalPages)}
+      >
         <RxDoubleArrowRight />
       </Button>
     </div>

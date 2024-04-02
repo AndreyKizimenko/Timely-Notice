@@ -24,10 +24,10 @@ const StatusFilter = () => {
 
   return (
     <Select.Root defaultValue={searchParams.get("status") || "All"} onValueChange={(status) => setSearchQuery(status)}>
-      <Select.Trigger className="w-40" />
+      <Select.Trigger data-cy="status-dropdown" className="w-40" />
       <Select.Content position="popper">
         {statuses.map((status) => (
-          <Select.Item key={status.value} value={status.value}>
+          <Select.Item data-cy={`status-${status.value}`} key={status.value} value={status.value}>
             {status.name}
           </Select.Item>
         ))}

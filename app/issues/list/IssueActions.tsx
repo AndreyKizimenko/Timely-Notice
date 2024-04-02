@@ -8,7 +8,7 @@ const IssueActions = async () => {
     <div className="flex justify-between">
       <StatusFilter />
       <Link href="/issues/new">
-        <Button className="hover:cursor-pointer">New issue</Button>
+        <Button data-cy="new-issue-button" className="hover:cursor-pointer">New issue</Button>
       </Link>
     </div>
   );
