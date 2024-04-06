@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Timely Notice: A Web App for Efficient Issue Management
+
+This repository contains the codebase for Timely Notice, a web application built to streamline bug reporting and management. It empowers developers and testers to collaborate effectively on resolving software issues.
+
+# Tech Stack
+
+Timely Notice leverages a modern and robust tech stack to deliver a performant and user-friendly experience:
+
+- **Frontend:** React, Next.js, NextAuth.js, Radix UI, Tailwind CSS
+- **Backend:** TypeScript, Prisma (ORM), MySQL
+- **Data Validation:** zod
+- **State Management:** Zustand
+- **Authentication:** NextAuth.js (with bcrypt for password hashing)
+- **Testing:** Cypress
+
+## Features
+
+Timely Notice offers comprehensive functionalities for efficient bug management:
+
+- **Authentication:** Secure user login and registration
+- **Bug Logging:** Easy creation of bug reports with detailed descriptions
+- **Collaboration:** Assign bugs to specific developers for resolution, track progress
+- **Filtering and Searching:** Efficiently search for bugs based on various criteria
 
 ## Getting Started
-
-First, run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+Create a `.env.local` file in the project root directory and configure environment variables for database connection:
+DATABASE_URL=mysql://your_username:your_password@localhost:3306/bug_tracker
+Replace `your_username`, `your_password`, and `bug_tracker` with your actual MySQL credentials and database name.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Testing
+Timely Notice utilizes Cypress for comprehensive automated testing. Refer to the project's `cypress` directory for test cases and execution instructions.
