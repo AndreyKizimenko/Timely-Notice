@@ -28,7 +28,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   };
 
   return (
-    <div className="flex gap-2 items-center py-4">
+    <div data-cy="pagination-component" className="flex gap-2 items-center py-4">
       <Button
         data-cy="pagination-first"
         disabled={currentPage === 1}
