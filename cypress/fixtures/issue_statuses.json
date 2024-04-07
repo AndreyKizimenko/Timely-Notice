@@ -1,0 +1,8 @@
+{
+  "statuses": [
+    { "value": "All", "name": "All" },
+    { "value": "OPEN", "name": "Open" },
+    { "value": "IN_PROGRESS", "name": "In Progress" },
+    { "value": "CLOSED", "name": "Closed" }
+  ]
+}
