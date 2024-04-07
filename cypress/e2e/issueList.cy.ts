@@ -39,7 +39,7 @@ describe("Issue list", () => {
         cy.location("search").should("equal", `?orderBy=${header.value}`);
       });
     });
-    it.only("Issues list", () => {
+    it("Issues list", () => {
       cy.get("tbody > tr").each((row) => {
         cy.wrap(row)
           .find("td")
@@ -50,6 +50,35 @@ describe("Issue list", () => {
           });
       });
     });
-    it("Pagination buttons", () => {});
+    it.only("Pagination buttons", () => {
+      let currentPage: number;
+      let lastPage: number;
+
+      cy.getByData("pagination-text").then((pageText) => {
+        const paginationStatus = pageText.text();
+        const pages = paginationStatus.match(/(\d+) \/ (\d+)/);
+        if (pages) {
+          currentPage = parseInt(pages[1]);
+          lastPage = parseInt(pages[2]);
+        }
+        expect(currentPage).to.be.equal(1);
+
+        cy.getByData("pagination-first").should("be.disabled");
+        cy.getByData("pagination-previous").should("be.disabled");
+
+        if (lastPage === currentPage) {
+          cy.getByData("pagination-next").should("be.disabled");
+          cy.getByData("pagination-last").should("be.disabled");
+        } else {
+          cy.getByData("pagination-next").should("not.be.disabled");
+          cy.getByData("pagination-last").should("not.be.disabled");
+
+          cy.getByData("pagination-next").click();
+
+          cy.getByData("pagination-first").should("not.be.disabled");
+          cy.getByData("pagination-previous").should("not.be.disabled");
+        }
+      });
+    });
   });
 });

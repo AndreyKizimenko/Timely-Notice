@@ -28,7 +28,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
   };
 
   return (
-    <div data-cy="pagination-component" className="flex gap-2 items-center py-4">
+    <div className="flex gap-2 items-center py-4">
       <Button
         data-cy="pagination-first"
         disabled={currentPage === 1}
@@ -44,7 +44,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
         <MdKeyboardArrowLeft />
       </Button>
 
-      <Text size={"1"}>
+      <Text data-cy="pagination-text" size={"1"}>
         Page {currentPage} / {totalPages}
       </Text>
       <Button
