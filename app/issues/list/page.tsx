@@ -30,6 +30,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const pageSize = 15;
 
   const issueList = await prisma?.issue.findMany({
+    orderBy,
     where: { status: status },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
@@ -53,6 +54,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
               {headers.map((header) => (
                 <Table.ColumnHeaderCell key={header.value}>
                   <NextLink
+                    data-cy={`t-header-${header.value}`}
                     className={header.value === searchParams.orderBy ? "underline" : ""}
                     href={{ query: { ...searchParams, orderBy: header.value } }}
                   >
@@ -65,7 +67,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
           <Table.Body>
             {issueList.map((issue) => (
-              <Table.Row key={issue.id}>
+              <Table.Row key={issue.id} data-cy={`issue-${issue.id}`}>
                 <Table.Cell>
                   <StatusBadge status={issue.status} />
                 </Table.Cell>
