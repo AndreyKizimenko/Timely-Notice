@@ -22,7 +22,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const statuses = Object.values(Status);
   const status = statuses.includes(searchParams.status) ? searchParams.status : undefined;
   const orderBy = headers.map((header) => header.value).includes(searchParams.orderBy)
-    ? { [searchParams.orderBy]: "asc" }
+    ? { [searchParams.orderBy]: "desc" }
     : undefined;
   const currentPage = parseInt(
     searchParams.page && !isNaN(parseInt(searchParams.page)) ? searchParams.page : "1"

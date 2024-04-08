@@ -50,7 +50,7 @@ describe("Issue list", () => {
           });
       });
     });
-    it.only("Pagination buttons", () => {
+    it("Pagination buttons", () => {
       let currentPage: number;
       let lastPage: number;
 

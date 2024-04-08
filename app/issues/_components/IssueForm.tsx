@@ -47,6 +47,7 @@ const IssueForm = ({ issueDetails }: Props) => {
       <form className="w-2/5" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
           <TextField.Input
+            data-cy="new-issue-title"
             defaultValue={issueDetails?.title}
             placeholder="Issue title"
             {...register("title", { required: true })}
@@ -55,6 +56,7 @@ const IssueForm = ({ issueDetails }: Props) => {
         </TextField.Root>
         {errors.title && <FormError>{errors.title.message}</FormError>}
         <TextArea
+          data-cy="new-issue-description"
           defaultValue={issueDetails?.description}
           className="my-4"
           size="3"
@@ -63,16 +65,15 @@ const IssueForm = ({ issueDetails }: Props) => {
           aria-invalid={errors.description ? "true" : "false"}
         />
         {errors.description && <FormError>{errors.description.message}</FormError>}
-        
+
         {isSubmitting ? (
           <Button disabled type="submit">
             <Spinner />
             Adding...
           </Button>
         ) : (
-          <Button type="submit">{issueDetails ? "Update issue" : "Add new issue"}</Button>
+          <Button data-cy="new-issue-submit" type="submit">{issueDetails ? "Update issue" : "Add new issue"}</Button>
         )}
-        
       </form>
     </>
   );
