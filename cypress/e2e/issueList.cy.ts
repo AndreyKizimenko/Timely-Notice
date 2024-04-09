@@ -49,7 +49,7 @@ describe("Issue list", () => {
             expect(cells.eq(2).text()).to.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/);
           });
       });
-    });
+    }); 
     it("Pagination buttons", () => {
       let currentPage: number;
       let lastPage: number;
