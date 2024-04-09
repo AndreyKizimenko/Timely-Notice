@@ -13,7 +13,7 @@ const IssueDetailsPage = async ({ params: { issueID } }: { params: { issueID: st
 
   return (
     <Grid className="mx-16" columns="5" gap="9">
-      <div className="col-span-4">
+      <div className="col-span-4" data-cy="issue-details">
         <IssueDetails issueDetails={issueDetails} />
       </div>
       <div className="col-span-1 flex flex-col gap-4">

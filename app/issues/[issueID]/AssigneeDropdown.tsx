@@ -33,12 +33,11 @@ const AssigneeDropdown = ({ issueID, assignedToUserID }: Props) => {
   return (
     <>
       <Select.Root
-        
         defaultValue={assignedToUserID ? assignedToUserID : "unassigned"}
         onValueChange={(value) => handleUpdate(value)}
       >
-        <Select.Trigger />
-        <Select.Content position="popper">
+        <Select.Trigger data-cy="assignee-dropdown" />
+        <Select.Content position="popper" data-cy="assignee-dropdown-items">
           <Select.Item value="unassigned">Unassigned</Select.Item>
           {isLoading && (
             <div className="mt-1">

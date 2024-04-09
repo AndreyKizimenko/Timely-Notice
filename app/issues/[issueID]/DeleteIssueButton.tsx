@@ -26,12 +26,12 @@ const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
     <div>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button disabled={isDeleteing} color="red">
+          <Button data-cy="delete-issue-button" disabled={isDeleteing} color="red">
             Delete Issue {isDeleteing && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
 
-        <AlertDialog.Content style={{ maxWidth: 500 }}>
+        <AlertDialog.Content style={{ maxWidth: 500 }} data-cy="delete-issue-modal">
           <AlertDialog.Title>Delete Issue</AlertDialog.Title>
           <AlertDialog.Description size="2">
             Are you sure you want to delete this issue? This action is permanent and cannot be
@@ -40,12 +40,12 @@ const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
 
           <Flex gap="3" mt="4" justify="end">
             <AlertDialog.Cancel>
-              <Button variant="soft" color="gray">
+              <Button data-cy="delete-issue-cancel" variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button onClick={() => handleDelete()} variant="solid" color="red">
+              <Button data-cy="delete-issue-confirm" onClick={() => handleDelete()} variant="solid" color="red">
                 Delete issue
               </Button>
             </AlertDialog.Action>
